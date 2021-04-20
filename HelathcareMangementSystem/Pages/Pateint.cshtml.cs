@@ -5,20 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using HealthcareMangementSystem.Models;
+using HealthcareMangementSystem.Models.DB;
 
-namespace HealthcareMangementSystem.Pages.Patients
+namespace HealthcareMangementSystem.Pages
 {
-    public class DeleteModel : PageModel
+    public class PateintModel : PageModel
     {
-        private readonly HealthcareMangementSystem.Models.IrelandHospitalContext _context;
+        private readonly HealthcareMangementSystem.Models.DB.IrelandHospitalContext _context;
 
-        public DeleteModel(HealthcareMangementSystem.Models.IrelandHospitalContext context)
+        public PateintModel(HealthcareMangementSystem.Models.DB.IrelandHospitalContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
         public Patient Patient { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -37,24 +36,6 @@ namespace HealthcareMangementSystem.Pages.Patients
                 return NotFound();
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Patient = await _context.Patients.FindAsync(id);
-
-            if (Patient != null)
-            {
-                _context.Patients.Remove(Patient);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
         }
     }
 }

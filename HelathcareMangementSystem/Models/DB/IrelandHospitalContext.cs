@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace HealthcareMangementSystem.Models
+namespace HealthcareMangementSystem.Models.DB
 {
     public partial class IrelandHospitalContext : DbContext
     {
@@ -20,6 +20,7 @@ namespace HealthcareMangementSystem.Models
         public virtual DbSet<AppointmentHistory> AppointmentHistories { get; set; }
         public virtual DbSet<CovidInformation> CovidInformations { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<PatientAddress> PatientAddresses { get; set; }
@@ -31,7 +32,14 @@ namespace HealthcareMangementSystem.Models
         public virtual DbSet<TblOrganDonationDetail> TblOrganDonationDetails { get; set; }
         public virtual DbSet<Vacancy> Vacancies { get; set; }
 
-       
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-K9BAT38\\SQLEXPRESS;Database=IrelandHospital;Trusted_Connection=True;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -75,7 +83,7 @@ namespace HealthcareMangementSystem.Models
                 entity.Property(e => e.CovidStatus)
                     .HasMaxLength(2)
                     .IsUnicode(false)
-                    .IsFixedLength();
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.CovidTestDate).HasColumnType("date");
 
@@ -104,6 +112,25 @@ namespace HealthcareMangementSystem.Models
                     .HasForeignKey(d => d.HospitalId)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("d_code_fk");
+            });
+
+            modelBuilder.Entity<Login>(entity =>
+            {
+                entity.ToTable("Login");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("password");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("username");
             });
 
             modelBuilder.Entity<Medicine>(entity =>
@@ -140,7 +167,7 @@ namespace HealthcareMangementSystem.Models
                     .IsRequired()
                     .HasMaxLength(2)
                     .IsUnicode(false)
-                    .IsFixedLength();
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.PatientName)
                     .IsRequired()
@@ -282,12 +309,12 @@ namespace HealthcareMangementSystem.Models
                 entity.Property(e => e.HasBloodDonation)
                     .HasMaxLength(2)
                     .IsUnicode(false)
-                    .IsFixedLength();
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.HasOrganDonation)
                     .HasMaxLength(2)
                     .IsUnicode(false)
-                    .IsFixedLength();
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.HospitalName)
                     .IsRequired()

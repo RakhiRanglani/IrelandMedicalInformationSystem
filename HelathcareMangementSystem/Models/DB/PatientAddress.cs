@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace HealthcareMangementSystem.Models
+namespace HealthcareMangementSystem.Models.DB
 {
     public partial class PatientAddress
     {

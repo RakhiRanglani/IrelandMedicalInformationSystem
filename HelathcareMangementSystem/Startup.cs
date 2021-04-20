@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HealthcareMangementSystem.Models;
+using HealthcareMangementSystem.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthcareMangementSystem
@@ -26,10 +26,10 @@ namespace HealthcareMangementSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-          
-           services.AddDbContext<IrelandHospitalContext>(options =>
-           options.UseSqlServer(Configuration.GetConnectionString("IrelandHospitalContext")));
-           services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddDbContext<IrelandHospitalContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("IrelandHospitalContext")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
