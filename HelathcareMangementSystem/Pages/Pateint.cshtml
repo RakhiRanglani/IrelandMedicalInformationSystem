@@ -1,5 +1,5 @@
 ﻿@page
-@model HealthcareMangementSystem.Pages.PateintModel
+@model HealthcareMangementSystem.Models.ViewModels.PatientVM
 
 @{
     ViewData["Title"] = "Pateint";
@@ -12,29 +12,12 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.PatientName)
+            @Html.DisplayNameFor(model => model.PatientName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.PatientName)
+            @Html.DisplayFor(model => model.PatientLastName)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.CovidFlag)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.CovidFlag)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.Address.AdressLine1)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.AppHistory)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.AppHistory.AppHistoryId)
-        </dd>
+       
     </dl>
 </div>
 
