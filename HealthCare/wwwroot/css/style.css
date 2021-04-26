@@ -1,0 +1,60 @@
+.bgimg-1 {
+    background-position: center;
+    background-size: cover;
+    background-image: url("/image/mac.jpg");
+    min-height: 100%;
+}
+
+.body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway", sans-serif
+}
+
+body, html {
+    height: 100%;
+    line-height: 1.8;
+}
+
+
+.w3-bar .w3-button {
+    padding: 16px;
+}
+.header {
+    height: 100vh;
+    background-color: #fdfdfd;
+    background-image: url("/image/Hospital3.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.form h1 {
+    padding-left: 50px;
+    color: rgb(12, 7, 7);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.search-field {
+    height: 30px;
+    padding: 10px;
+    border: honeydew;
+    border-radius: 25px;
+    outline: none;
+}
+
+.Location {
+    width: 200px;
+}
+
+.search-btn {
+    height: 50px;
+    width: 150px;
+    background: #ffeb3c;
+    font-weight: bold;
+    border: none;
+    color: #000;
+    border-radius: 25px;
+}

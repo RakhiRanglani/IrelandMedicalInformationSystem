@@ -1,0 +1,145 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+
+#latest-vaccine-news {
+    position: relative;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.bg-beige {
+    background-color: beige;
+}
+
+.navbar-light .navbar-brand {
+    color: darkred;
+}
+
+#latest-vaccine-news .space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+#latest-vaccine-news .margin-right {
+    margin-right: 6%;
+}
+
+#latest-vaccine-news .news {
+    width: 45%;
+    background: lightgray;
+    color: darkred;
+    padding: 30px 15px 30px 25px;
+}
+
+@media (min-width: 992px) {
+    pre-footer {
+        border: 1px solid #fff;
+    }
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.pre-footer {
+    color: #fff;
+    background-color: #b4083a;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    background: beige;
+}
+/*about us page*/
+
+
+.about-section {
+    background: url("../image/IHMS2.jpg") no-repeat left;
+    background-size: 55%;
+    background-color: #fdfdfd;
+    overflow: hidden;
+}
+
+.inner-container {
+    width: 50%;
+    float: right;
+    background-color: #fdfdfd;
+    padding: 100px;
+}
+
+.inner-container h1 {
+        margin-bottom: 30px;
+        font-size: 30px;
+        font-weight: 900;
+    }
+
+.text {
+    font-size: 13px;
+    color: black;
+    line-height: 30px;
+    text-align: justify;
+    margin-bottom: 40px;
+}

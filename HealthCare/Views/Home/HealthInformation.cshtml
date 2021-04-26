@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "Health Informatiion";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+
+    <section id="latest-vaccine-news">
+        <div class="container">
+            <div class="row space-between">
+                <div class="news margin-right">
+                    <h2>COVID Tracker App</h2>
+                    <p>Stay safe. Protect each other.</p>
+                    <div><button class="btn" onclick="location.href='https://covidtracker.gov.ie/qr/'" type="button">Download the app</button></div>
+                </div>
+                <div class="news">
+                    <h2>Latest Articles</h2>
+                    <p>Read the latest articles from the HSE.</p>
+                    <div><button class="btn" onclick="location.href='https://www.hse.ie/eng/services/news/'" type="button">Latest News</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div></div><div></div>
+    <section id="latest-vaccine-news" style="margin-top: 2%;">
+        <div class="container">
+            <div class="row space-between">
+                <div class="news margin-right">
+                    <h2>Hospital Search Engine</h2>
+                    <p>Search your private and Government Hospitals</p>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="HospitalSearch">Visit</a>
+                </div>
+                <div class="news">
+                    <h2>Organ Donation</h2>
+                    <p>Find out near by Organ Donation Events.</p>
+                    <div><button class="btn" onclick="location.href='https://www.hse.ie/eng/services/news/'" type="button">Visit</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="latest-vaccine-news" style="margin-top: 2%;">
+        <div class="container">
+            
+            <div class="row space-between">
+                <div class="news margin-right">
+                    <h2>Blood Donation </h2>
+                    <p>Find out near by Blood Donation Events.</p>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="BloodDonationDetails" asp-action="Index">Visit</a>
+
+                    @*<div><button class="btn" onclick="location.href='https://covidtracker.gov.ie/qr/'" type="button">Visit</button></div>*@
+                </div>
+                <div class="news">
+                    <h2>Rehabilitation Centers</h2>
+                    <p>Information about Rehabilitation Centers</p>
+                    <div><button class="btn" onclick="location.href='https://www.hse.ie/eng/services/news/'" type="button">Visit</button></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section id="latest-vaccine-news" style="margin-top: 2%;">
+        <div class="container">
+            <div class="row space-between">
+                <div class="news margin-right">
+                    <h2>Medicine Availability</h2>
+                    <p>Find out nearer pharmacy details which has medicines available</p>
+                    <div><button class="btn" onclick="location.href='https://covidtracker.gov.ie/qr/'" type="button">Visit</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
