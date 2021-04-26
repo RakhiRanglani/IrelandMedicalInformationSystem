@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HealthcareMangementSystem.Models;
+using HealthcareMangementSystem.Models.DB;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthcareMangementSystem
@@ -32,7 +32,7 @@ namespace HealthcareMangementSystem
                 {
                     var context = services.GetRequiredService<IrelandHospitalContext>();
                     context.Database.EnsureCreated();
-                    // DbInitializer.Initialize(context);
+                    //DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
