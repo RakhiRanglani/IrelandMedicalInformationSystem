@@ -1,9 +1,7 @@
-﻿
-@page
-@model HealthCare.ViewModel.HospitalSearchViewModel
+﻿@model HealthCare.ViewModel.HospitalSearchViewModel
 @{
 
-    ViewData["Title"] = "Hospital Search";
+    ViewBag.Title = "Hospital Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -47,13 +45,13 @@
 <body>
     <div class="header">
 
-        <div class="row">
+        <div class="row" style="margin-right: 70%;">
             <div class="col-md-8">
                 <section>
-                    <form method="post" role="form" class="form-horizontal">
+                    <form method="post" role="form" class="form-horizontal" style="width: 365%;">
                         @Html.AntiForgeryToken()
 
-                        <h4>Search Hospitals Near You </h4>
+                        <h4 style="font-family: fantasy;">Search Hospitals Near You </h4>
                         <hr />
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -83,14 +81,15 @@
 
     </div>
 
-    @if (Model != null)
+    @if (Model != null && Model.Hospitallist.Count>0)
     {
         <div class="row">
             <div class="col-md-offset-1 col-md-8">
                 <section>
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" style="width: 152% !important;">
                         <thead>
                             <tr>
+                                <th style="text-align: center;">Sr No.</th>
                                 <th style="text-align: center;">Hospital Name</th>
                                 <th style="text-align: center;">Hospital Type</th>
                                 <th style="text-align: center;">City</th>
