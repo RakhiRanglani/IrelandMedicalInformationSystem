@@ -22,4 +22,8 @@
     <Folder Include="wwwroot\image\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\BloodDonationDetails\OrganDonationDetail.cshtml" />
+  </ItemGroup>
+
 </Project>
