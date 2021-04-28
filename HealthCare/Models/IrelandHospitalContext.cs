@@ -37,6 +37,8 @@ namespace HealthCare.Models
         public virtual DbSet<TblOrganDonationDetail> TblOrganDonationDetails { get; set; }
         public virtual DbSet<Vacancy> Vacancies { get; set; }
         public virtual DbSet<HospitalSearchViewModel> Getghospitaltype { get; set; }
+
+        public virtual DbSet<MedicineViewModel> GetMedicineAvailability { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
