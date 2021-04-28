@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HealthCare.ViewModel;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -36,6 +37,8 @@ namespace HealthCare.Models
         public virtual DbSet<TblOrganDonationDetail> TblOrganDonationDetails { get; set; }
         public virtual DbSet<Vacancy> Vacancies { get; set; }
         public virtual DbSet<HospitalSearchViewModel> Getghospitaltype { get; set; }
+        public virtual DbSet<OrganDonationViewModel> GetOrganInformation { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -418,17 +421,21 @@ namespace HealthCare.Models
          
             OnModelCreatingPartial(modelBuilder);
         }
-        //public async Task<List<HospitalSearchViewModel>> Getghospitaltype()
+        //public async Task<List<HospitalSearchViewModel>> GetProductByIDAsync(string type,string city)
         //{
         //    // Initialization.  
         //    List<HospitalSearchViewModel> lst = new List<HospitalSearchViewModel>();
 
         //    try
         //    {
+        //        // Settings.  
+        //        SqlParameter typeparam = new SqlParameter("@type", type ?? (object)DBNull.Value);
+        //        SqlParameter locationparam = new SqlParameter("@city", city ?? (object)DBNull.Value);
         //        // Processing.  
-        //        string sqlQuery = "EXEC [dbo].[Getghospitaltype] ";
+        //        string sqlQuery = "EXEC [dbo].[Getgospitaltype] " +
+        //                            "@type"+ "@city";
 
-        //        lst = await this.Query<HospitalSearchViewModel>().FromSql(sqlQuery).ToListAsync();
+        //        lst = await this.<HospitalSearchViewModel>().FromSql(sqlQuery, typeparam, locationparam).ToListAsync();
         //    }
         //    catch (Exception ex)
         //    {
@@ -438,7 +445,9 @@ namespace HealthCare.Models
         //    // Info.  
         //    return lst;
         //}
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+   
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
       
     }
 }

@@ -1,0 +1,94 @@
+﻿@model HealthCare.ViewModel.OrganDonationViewModel
+@{
+
+    ViewBag.Title = "Organ Availibility Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/style.css" />*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    @*<style type="text/css">
+            @@media only screen and (min-width: 300px) {
+                table, th, td {
+                    border: 1px solid black;
+                    text-align: center;
+                }
+
+                th {
+                    height: 50px;
+                    background-color: darkgray;
+                    color: white;
+                    font-size: 14px;
+                    white-space: nowrap;
+                }
+
+                tr {
+                    height: 30px;
+                }
+
+                    tr:nth-child(even) {
+                        background-color: #f2f4f5;
+                    }
+
+                td {
+                    font-size: 12px;
+                    white-space: nowrap;
+                }
+            }
+        </style>*@
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center;font-family: fangsong;margin-bottom: 5%;">Organ Donation Event Related Infromation</h2>
+       
+        @if (Model != null && Model.OrganDetailslist.Count > 0)
+        {
+
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Sr No.</th>
+                        <th style="text-align: center;">Event Date</th>
+                        <th style="text-align: center;">Event Description</th>
+                        <th style="text-align: center;">Organ Data</th>
+                        <th style="text-align: center;">Organ Availability</th>
+                        <th style="text-align: center;">Hospital Type</th>
+                        <th style="text-align: center;">City</th>
+                        <th style="text-align: center;">EIR Code</th>
+                        <th style="text-align: center;">County</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (int i = 0; i < Model.OrganDetailslist.Count; i++)
+                    {
+                        <tr>
+                            <td style="text-align: center;">@(i + 1)</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].EventDate.ToShortDateString()</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].EventDescription</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].Organ</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].AvailabilityInfo</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].HospitalName</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].City</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].EIRCode</td>
+                            <td style="text-align: center;">@Model.OrganDetailslist[i].County</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+
+        }
+        </div>
+
+</body>
+</html>

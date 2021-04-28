@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HealthCare.Models;
+using HealthCare.ViewModel;
 
 namespace HealthCare.Controllers
 {
@@ -147,6 +148,14 @@ namespace HealthCare.Controllers
         private bool TblBloodDonationDetailExists(int id)
         {
             return _context.TblBloodDonationDetails.Any(e => e.BloodDonationId == id);
+        }
+        [HttpGet]
+        public IActionResult OrganDonationDetail(OrganDonationViewModel model)
+        {
+            
+            model.OrganDetailslist = _context.GetOrganInformation.FromSqlInterpolated($"GetOrganData").ToList();
+            return View(model);
+
         }
     }
 }

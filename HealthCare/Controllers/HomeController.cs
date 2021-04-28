@@ -1,4 +1,5 @@
 ﻿using HealthCare.Models;
+using HealthCare.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,14 @@ namespace HealthCare.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly IrelandHospitalContext dbContext;
+        private readonly IrelandHospitalContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IrelandHospitalContext context, ILogger<HomeController> logger)
         {
+            _context = context;
             _logger = logger;
         }
+
 
         public IActionResult Index()
         {
@@ -39,14 +42,13 @@ namespace HealthCare.Controllers
         {
             return View();
         }
-        public IActionResult HospitalSearch()
+        public IActionResult HospitalSearch(HospitalSearchViewModel model)
         {
-           
+             string param1 =model.HospitalType;
+             string param2 = model.City;
 
-            var searchrecord = dbContext.Getghospitaltype.FromSqlInterpolated($"Getghospitaltype").ToList();
-
-            //var searchrecord = dbContext.Getghospitaltype.FromSql($ "RetrieveEmployeeRecord {id}").ToList();
-            return View(searchrecord);
+            model.Hospitallist = _context.Getghospitaltype.FromSqlInterpolated($"Getgospitaltype {param1},{param2}").ToList();
+            return View(model);
 
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
