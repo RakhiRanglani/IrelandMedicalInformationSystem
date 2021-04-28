@@ -19,7 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\image\" />
+    <Folder Include="wwwroot\image\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\BloodDonationDetails\OrganDonationDetail.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -37,6 +37,8 @@ namespace HealthCare.Models
         public virtual DbSet<TblOrganDonationDetail> TblOrganDonationDetails { get; set; }
         public virtual DbSet<Vacancy> Vacancies { get; set; }
         public virtual DbSet<HospitalSearchViewModel> Getghospitaltype { get; set; }
+        public virtual DbSet<OrganDonationViewModel> GetOrganInformation { get; set; }
+
 
         public virtual DbSet<MedicineViewModel> GetMedicineAvailability { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -44,7 +46,7 @@ namespace HealthCare.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-K9BAT38\\SQLEXPRESS;Database=IrelandHospital;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=LEGION;Database=IrelandHospital;Trusted_Connection=True;");
             }
         }
 

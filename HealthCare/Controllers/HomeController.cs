@@ -42,6 +42,10 @@ namespace HealthCare.Controllers
         {
             return View();
         }
+        public  IActionResult Rehab()
+        {
+            return View();
+        }
         public IActionResult HospitalSearch(HospitalSearchViewModel model)
         {
              string param1 =model.HospitalType;
