@@ -55,10 +55,19 @@ namespace HealthCare.Controllers
             return View(model);
 
         }
-        public IActionResult MedicineSearch(MedicineViewModel model)
+        [HttpGet]
+        public IActionResult MedicalSearch(MedicineViewModel model)
         {
-          
-            model.Medicine = _context.Getghospitaltype.FromSqlInterpolated($"Getgospitaltype {param1},{param2}").ToList();
+            
+            string medicinename = model.Medicine_Name;
+            if (medicinename != null)
+            {
+                model.Medicinelist = _context.GetMedicineAvailability.FromSqlInterpolated($"MedicineAvailability{medicinename}").ToList();
+            }
+            else
+            {
+                model = new MedicineViewModel();
+            }
             return View(model);
 
         }
