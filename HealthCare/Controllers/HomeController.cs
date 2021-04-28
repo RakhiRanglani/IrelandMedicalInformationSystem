@@ -55,6 +55,13 @@ namespace HealthCare.Controllers
             return View(model);
 
         }
+        public IActionResult MedicineSearch(MedicineViewModel model)
+        {
+          
+            model.Medicine = _context.Getghospitaltype.FromSqlInterpolated($"Getgospitaltype {param1},{param2}").ToList();
+            return View(model);
+
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
