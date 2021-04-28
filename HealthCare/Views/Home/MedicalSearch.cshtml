@@ -12,35 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-    @*<style type="text/css">
-            @@media only screen and (min-width: 300px) {
-                table, th, td {
-                    border: 1px solid black;
-                    text-align: center;
-                }
-
-                th {
-                    height: 50px;
-                    background-color: darkgray;
-                    color: white;
-                    font-size: 14px;
-                    white-space: nowrap;
-                }
-
-                tr {
-                    height: 30px;
-                }
-
-                    tr:nth-child(even) {
-                        background-color: #f2f4f5;
-                    }
-
-                td {
-                    font-size: 12px;
-                    white-space: nowrap;
-                }
-            }
-        </style>*@
+    
 </head>
 <body>
     <div class="container">
@@ -78,7 +50,8 @@
             </div>
 
         </div>
-
+        @if (Model.Medicinelist.Count > 0)
+        {
         @if (Model != null && Model.Medicinelist.Count > 0)
         {
 
@@ -88,9 +61,8 @@
                         <th style="text-align: center;">Sr No.</th>
                         <th style="text-align: center;">Medicine Name</th>
                         <th style="text-align: center;">Medicine Availability</th>
-                        <th style="text-align: center;">Hospital Name</th>
+                        <th style="text-align: center;">Pharmacy Name</th>
                         <th style="text-align: center;">pharmacyAddress</th>
-                        <th style="text-align: center;">HospitalID</th>
                         <th style="text-align: center;">pharmacyContactNo</th>
                     </tr>
                 </thead>
@@ -102,9 +74,8 @@
                             <td style="text-align: center;">@(i + 1)</td>
                             <td style="text-align: center;">@Model.Medicinelist[i].Medicine_Name</td>
                             <td style="text-align: center;">@Model.Medicinelist[i].Medicine_Availability</td>
-                            <td style="text-align: center;">@Model.Medicinelist[i].HospitalName</td>
+                            <td style="text-align: center;">@Model.Medicinelist[i].pharmacyName</td>
                             <td style="text-align: center;">@Model.Medicinelist[i].pharmacyAddress</td>
-                            <td style="text-align: center;">@Model.Medicinelist[i].HospitalID</td>
                             <td style="text-align: center;">@Model.Medicinelist[i].pharmacyContactNo</td>
                         </tr>
 
@@ -114,7 +85,10 @@
 
 
         }
+        }
     </div>
-
+                
+            
+        
 </body>
 </html>
