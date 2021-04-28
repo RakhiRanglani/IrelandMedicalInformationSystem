@@ -42,6 +42,11 @@ namespace HealthCare.Controllers
         {
             return View();
         }
+        public IActionResult covidtimeline()
+        {
+            return View();
+        }
+        
         public  IActionResult Rehab()
         {
             return View();

@@ -1,0 +1,105 @@
+html, body {
+    height:100% 
+}
+
+body{
+    background-color: #222222;
+}
+
+#flexcontainer{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 98%;
+    margin-left:3%;
+    margin-right:3%;
+}
+
+#title{
+    font-size: 1.9em;
+}
+
+.caption{
+    color: #777777;
+}
+
+#timelineSlider{
+    width: 100%; 
+    height: 2em;
+}
+
+#mapid{
+    flex-grow: 1;
+}
+
+#date{
+    width: 100%; 
+    font-size: 1.6em;
+    color: #999999;
+}
+
+#datasrc{
+    font-size: 0.8em;
+}
+
+#dateListPanel{
+    overflow: hidden;
+}
+
+#datelist{
+    position: relative;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    top: 0.5em;
+    left: 0;
+    width: 100%;
+    height:5em;
+}
+
+.dateListElement{
+    font-size: 1em;
+    transform-origin: 2em 2em;
+    transform: rotate(-75deg);
+    color: #999999;
+    width: 1.4em;
+    flex-shrink: 1;
+    flex-grow: 1;
+    margin: 0px;
+}
+
+.dateListElement.highlight{
+    color: #eeeeee;
+    font-weight: bold;
+}
+
+.dateListElement:hover{
+    color: #cccccc;
+    font-weight: bold;
+}
+
+#popup {
+    padding: 31px;
+    background-color: #777777;
+    color: #eeeeee;
+    font-size: 1.1em;
+    position: absolute;
+    left: 68%;
+    right: 10%;
+    top: 5em;
+    height: 5em;
+    opacity: 62%;
+    border-radius: 40px 39px 36px 42px;
+}
+
+
+}
+
+
+
+
+
+.unselectable{
+    user-select: none;
+}
