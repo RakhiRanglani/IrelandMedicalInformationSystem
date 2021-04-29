@@ -152,9 +152,50 @@ namespace HealthCare.Controllers
         [HttpGet]
         public IActionResult OrganDonationDetail(OrganDonationViewModel model)
         {
-            
+
             model.OrganDetailslist = _context.GetOrganInformation.FromSqlInterpolated($"GetOrganData").ToList();
             return View(model);
+
+        }
+
+        public IActionResult MedicalCardLogin(MedicalCardViewModel model)
+        {
+            int id = model.MedicalCardId;
+            bool hasaccess = false;
+            if (id != 0)
+            {
+                var result = _context.GetMedicalAccess.FromSqlInterpolated($"uspGetAccessFlag {id}").ToList();
+                if (result.Count > 0)
+                {
+                    foreach (var item in result)
+                    {
+                        if (item.AccessLevel.Trim() == "Y")
+                        {
+                            hasaccess = true;
+                            break;
+                        }
+                    }
+                }
+                if (hasaccess)
+                {
+
+                    return RedirectToAction("OrganDonationDetail", "BloodDonationDetails");
+                }
+                else
+                {
+                    TempData["error_msg"] = "You dont have access to view this page!!";
+                  
+                    return View(model);
+                }
+
+            }
+            else
+            {
+                model = new MedicalCardViewModel();
+                return View(model);
+            }
+
+
 
         }
     }
