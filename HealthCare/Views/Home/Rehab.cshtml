@@ -1,91 +1,102 @@
-﻿<!DOCTYPE HTML>
-<head>
-    <title> Rehabilitation Centers </title>
+﻿@model HealthCare.ViewModel.RehabilationViewModel
+@{
 
-    <link href="css/style.css" type="text/css" rel="stylesheet">
+    ViewBag.Title = "Rehabilation Centers Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!DOCTYPE HTML>
+<head>
+    <link rel="stylesheet" href="~/css/rehabStyle.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
     <div class="logo">
         <div>
             <table>
-                <tr><br>
-                    <td width="800px" style="font-size:30px;font-family:'Times New Roman', Times, serif;"> <font color="#000"> Rehabilitation Centres Information </font> </td>
-                    <td>
+                <tr>
+                    <br>
+                    <td width="800px" style="font-size: 30px; font-family: 'Times New Roman', Times, serif; width: 88%;"> <font color="#000"> Rehabilitation Centres Information </font> </td>
+                    <td display: flex;>
+                        <a href="https://www.goldenpages.ie/rehabilitation-centres/ireland/">Availabe Centres</a>
+                        <br><a href="https://goo.gl/maps/TvWPL8AwMYL4ymvp9">Rehab Locations</a>
+                        <br><a href="https://www.hse.ie/eng/about/who/primarycare/socialinclusion/homelessness-and-addiction/addiction-treatment-and-rehabilitation/">HSE updates</a>
 
-                           
-    <a href="https://www.goldenpages.ie/rehabilitation-centres/ireland/">Availabe Centres</a>
-    <br><a href="https://goo.gl/maps/TvWPL8AwMYL4ymvp9">Rehab Locations</a>
-    <br><a href="https://www.hse.ie/eng/about/who/primarycare/socialinclusion/homelessness-and-addiction/addiction-treatment-and-rehabilitation/">HSE updates</a>
-
-</td>
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
-</body>
 
+    <div class="middle">
+        <div style="background-image: url('/Image/a.jpg');">
 
-
-<div class="middle">
-    <div style="background-image:url('img/a.jpg');">
-
-        <p>
-            <br> <br>
-            Welcome to Rehabilitation Center Search Page  <br />
+            <p>
+                <br> <br>
+                Welcome to Rehabilitation Center Search Page  <br />
                 We aim to help people with issues relating to substance misuse, to achieve improved health outcomes. We are responsible for delivering a wide range of national policy objectives as outlined in the Reducing Harm, Supporting Recovery: “A health-led response to drug and alcohol use in Ireland” – 2017 – 2025.<br> We particularly focus on:
-
                 early intervention;
                 treatment; and
                 rehabilitation.
-        </p>
+            </p>
+        </div>
     </div>
-</div>
+    <div class="w3-content" style=" max-width:700px">
+        <h2 style="text-align: center;font-family: fangsong;margin-bottom: 5%;">Rehabilation centers Information</h2>
 
+        @if (Model != null && Model.rehabilationlist.Count > 0)
+        {
 
-<div class="bottom_up">
-    <div>
-        Enter Details to get updates on Events
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Sr No.</th>
+                    <th style="text-align: center;">Centre Details</th>
+                    <th style="text-align: center;">Availability Details</th>
+                    <th style="text-align: center;">Rehabilitation Service</th>
+                    <th style="text-align: center;">Hospital Name</th>
+                    <th style="text-align: center;">City</th>
 
-        <table>
+                </tr>
+            </thead>
 
-            <tr>
-                <td width="500px"> </td>
-                <td>	<input type="text" placeholder="First Name">
-                <td> 	<input type="text" placeholder="Last Name">
-            </tr>
-            <tr height="30px">
-            </tr>
-            <tr>
-                <td width="500px"> </td>
-                <td>	<input type="text" placeholder="Email Id">
-                <td> 	<input type="text" placeholder="Mobile No">
-            </tr>
+            <tbody>
+                @for (int i = 0; i < Model.rehabilationlist.Count; i++)
+                    {
+                <tr>
+                    <td style="text-align: center;">@(i + 1)</td>
+                    <td style="text-align: center;">@Model.rehabilationlist[i].CentreDetails</td>
+                    <td style="text-align: center;">@Model.rehabilationlist[i].AvailabilityDetails</td>
+                    <td style="text-align: center;">@Model.rehabilationlist[i].RehabilitationType</td>
+                    <td style="text-align: center;">@Model.rehabilationlist[i].HospitalName</td>
+                    <td style="text-align: center;">@Model.rehabilationlist[i].City</td>
 
-            <tr height="30px">
-            </tr>
-            <tr>
-                <td width="500px"> </td>
-                <td>	<select> <option> -- Sex -- </option> <option> Male </option> <option> Female </option> </select>
-                <td> 	<input type="text" placeholder="appointment date">
-            </tr>
+                </tr>
 
-            <tr height="30px">
-            </tr>
-            <tr>
-                <td width="500px"> </td>
-                <td colspan="2">	<textarea placeholder="Message"> </textarea>
-            </tr>
-
-            <tr height="30px">
-            </tr>
-            <tr>
-                <td width="500px"> </td>
-                <td colspan="2">	<button> SUBMIT </button>
-            </tr>
+                    }
+            </tbody>
         </table>
 
+
+        }
     </div>
-</div>
+    <div class="w3-content" style=" max-width:700px;margin-left: 65%;">
+        <h5 class="w3-center w3-padding-64" style=" padding-right: 52px;"><span class="w3-tag w3-wide">Email your query</span></h5>
+        <p>It is very important to know which rehabilatation center has availability and what are the services we provide..</p>
 
+        <p><span class="w3-tag">FYI!</span> We understand that you might have question regarding our services , you can get submit your query we will get back in next 24 hours..</p>
 
+        <form action="/Default.html">
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required="" name="Name"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required="" name="People"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required="" name="date" value="2020-11-16T20:00"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required="" name="Message"></p>
+            <p><button class="w3-button w3-black" id="btnsubmit" type="submit">SUBMIT</button></p>
+        </form>
+    </div>
+
+</body>

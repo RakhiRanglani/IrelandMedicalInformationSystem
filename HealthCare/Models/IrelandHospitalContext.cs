@@ -38,6 +38,7 @@ namespace HealthCare.Models
         public virtual DbSet<Vacancy> Vacancies { get; set; }
         public virtual DbSet<HospitalSearchViewModel> Getghospitaltype { get; set; }
         public virtual DbSet<OrganDonationViewModel> GetOrganInformation { get; set; }
+        public virtual DbSet<RehabilationViewModel> GetRehabInfo { get; set; }
         public virtual DbSet<MedicalCardViewModel> GetMedicalAccess { get; set; }
 
 
@@ -421,11 +422,11 @@ namespace HealthCare.Models
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("c_code_gk");
             });
-         
+
             OnModelCreatingPartial(modelBuilder);
         }
-        
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-      
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
     }
 }
