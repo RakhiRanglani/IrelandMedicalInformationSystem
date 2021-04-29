@@ -86,11 +86,12 @@ body{
     font-size: 1.1em;
     position: absolute;
     left: 68%;
-    right: 10%;
-    top: 5em;
+    right: 12%;
+    top: 6em;
     height: 5em;
     opacity: 62%;
     border-radius: 40px 39px 36px 42px;
+    margin: 13% 3% 0% -2%;
 }
 
 

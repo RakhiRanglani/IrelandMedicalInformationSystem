@@ -53,7 +53,10 @@ namespace HealthCare.Controllers
 
         public  IActionResult Rehab()
         {
-            return View();
+
+            model.rehabilationlist = _context.GetRehabInfo.FromSqlInterpolated($"Rehabilitation").ToList();
+            return View(model);
+           
         }
         public IActionResult HospitalSearch(HospitalSearchViewModel model)
         {
