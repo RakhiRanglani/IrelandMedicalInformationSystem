@@ -1,0 +1,264 @@
+﻿ @model HealthCare.ViewModel.MedicalCardViewModel
+
+@{
+    ViewData["Title"] = "Medical Card Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, h1, h3, h4, h5, h6 {
+            font-family: "Raleway", sans-serif
+        }
+        body h2 {
+            background-color: #f3f3f3;
+            /* font-size: 130%; */
+            font-size: 120%;
+            padding: 10px 0;
+            color: #00577b;
+            margin: 2em 0 0.5em;
+        }
+        body, html {
+            height: 100%;
+            line-height: 1.8;
+        }
+
+
+        .w3-bar .w3-button {
+            padding: 16px;
+        }
+
+        p {
+            font-family: open sans;
+            line-height: 1.5;
+            margin-bottom: 1em;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+            border: outset;
+            width: 19%;
+            display: flex;
+        }
+        .col-md-4 {
+            -ms-flex: 0 0 33.333333%;
+            flex: 0 0 33.333333%;
+            max-width: 8.333333%;
+        }
+        .button {
+            display: inline-block;
+            padding: 7px 30px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: darkgray;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px #999;
+        }
+
+            .button:hover {
+                background-color: darkred
+            }
+
+            .button:active {
+                background-color: darkred;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+    </style>
+</head>
+
+<body>
+    <div class="w3-container">
+        <div class="col-md-8" style="padding-right: 0px;padding-left: 0px;">
+            <section>
+                <form method="post" role="form" class="form-horizontal" style="width: 365%;">
+                    @Html.AntiForgeryToken()
+
+                    <h4 style="font-family: fantasy;">Please Enter your Medical Card Number and Click on Submit</h4>
+                    <hr />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div style="display: flex;">
+                        @Html.LabelFor(m => m.MedicalCardId, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.MedicalCardId, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.MedicalCardId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-offset-4 col-md-10">
+                        <button asp-page-handler="Detail" class="button  btn-default">Submit</button>
+                    </div>
+                    <div></div><div></div>
+                    <h3><strong style=" font-family: serif;color: red;">@TempData["error_msg"]</strong></h3>
+                </form>
+            </section>
+        </div>
+        <div class="topic base_howtoapply"style="margin-top: 4%;">
+            <h2 class="topic base_howtoapply_title" id="ld1a9a">If you dont have Medical Card then follow below instruction on how to apply</h2>
+
+            <p>
+                If you have any questions before you send your application, you can phone
+                Lo-call 1890 252 919, contact your Local Health Office, or email <a shape="rect" href="mailto:clientregistration@hse.ie">clientregistration@hse.ie</a>.
+            </p>
+
+            <p>
+                You can <strong>apply online</strong> for a medical card on <a shape="rect" href="http://www.medicalcard.ie">medicalcard.ie</a>. This is the quickest
+                method of getting the card.
+            </p>
+
+            <p>
+                Alternatively, you can <strong>download</strong> a medical card application
+                form:
+            </p>
+            <ul>
+                <li>
+                    <a href="http://www.hse.ie/eng/cards-schemes/medical-card/how-to-apply/medical-card-application-form-english.pdf">
+                        MC1
+                        Medical Card and GP Visit Card Application Form (pdf)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.hse.ie/eng/cards-schemes/medical-card/medical-card-for-over-70s/over70s-medical-card-application-form-english.pdf">
+                        MC1(a)
+                        Medical Card and GP Visit Card Application Form - People Aged 70 Years or
+                        Older (pdf)
+                    </a> if you are aged over 70
+                </li>
+            </ul>
+
+            <p>
+                You can also get the application form and a list of participating GPs from
+                your local health centre or Local Health Office for your area.
+            </p>
+
+            <p>
+                You return the form to the Client Registration Unit, along with any <a href="http://www.hse.ie/eng/cards-schemes/medical-card/what-documents-to-submit/">
+                    documents
+                    required
+                </a>. If you are applying online you can upload photos, scans or
+                photocopies of the original documents specified on the form.
+            </p>
+
+            <p>
+                If you are getting the <a href="../../social_welfare/social_welfare_payments/unemployed_people/covid19_pandemic_unemployment_payment.en.html">
+                    COVID-19
+                    Pandemic Unemployment Payment
+                </a>, you should include it in the box for
+                Jobseekers Allowance on the application form but you do not need to attach any
+                documentation for it. You do not need to include a school or college stamp with
+                your application during the COVID-19 pandemic.
+            </p>
+
+            <p>
+                If you cannot get required documents from your employer because they are
+                closed due to the emergency,use the comments section to state this when you
+                apply.
+            </p>
+
+            <p>You can track the progress of your medical card application at <a shape="rect" href="http://www.medicalcard.ie/">medicalcard.ie</a>.</p>
+
+            <p><strong>Selecting a doctor</strong></p>
+
+            <p>
+                If you apply online, the doctor you select will be contacted to accept you
+                as a medical card patient.
+            </p>
+
+            <p>
+                If you apply using the printed application form, you can call the GP that
+                you have chosen from the <a href="https://www2.hse.ie/services/medical-cards/gps-who-accept-medical-cards.html">
+                    list
+                    of participating doctors
+                </a>. Usually, the GP you select must be within 7 miles
+                of where you live. If the GP agrees to accept you as a patient for <a href="../health_services/gp_and_hospital_services/gp_services_to_medical_card_holders.en.html">
+                    medical
+                    card GP services
+                </a>, you can send them the form to sign. If you are refused by
+                3 GPs, state this on your application, including details of the doctors, and
+                the HSE will assign a doctor to you.
+            </p>
+
+            <p>
+                If a doctor is unavailable to sign your application form due to the COVID-19
+                emergency, you can apply online and they will be contacted for you. If you have
+                been a medical card patient within the last 6 months and you want to have the
+                same GP, you can use the paper application form and state that on the form.
+            </p>
+
+            <p></p>
+
+            <p><strong>Adding an infant to your card</strong></p>
+
+            <p>
+                If are a medical card holder and you have a baby, you can apply for a card
+                for the infant if you are getting <a href="../../social_welfare/social_welfare_payments/social_welfare_payments_to_families_and_children/child_benefit.en.html">
+                    Child
+                    Benefit
+                </a> for the child. To apply, send a covering note with your name,
+                address, phone number, PPS Number and medical card details and include a
+                photocopy of the child's birth certificate and PPS Number. See below for
+                contact details.
+            </p>
+
+            <p></p>
+
+            <p><strong>Children with Domiciliary Care Allowance</strong></p>
+
+            <p>
+                For a child that does not have a medical card or GP visit card, you can <a href="http://www.sspcrs.ie/portal/free-gp-care-dca-web">
+                    register the child for
+                    a medical card online
+                </a> or <a href="http://www.hse.ie/eng/services/list/1/schemes/mc/dca/Final%20Version%20DCA%20Form.pdf">
+                    download
+                    a registration form (pdf)
+                </a>.
+            </p>
+
+            <p>
+                If the child already has a medical card or GP visit card, you do not need to
+                register; they will be automatically registered for a medical card.
+            </p>
+
+            <p><strong>Children diagnosed with cancer</strong></p>
+
+            <p>
+                Children under the age of 18 who have been diagnosed with cancer within the
+                last 5 years are eligible for a medical card without a means test. The
+                application form does not require information about income but does require a
+                medical report. You can download the <a href="http://www.hse.ie/eng/services/list/1/schemes/mc/forms/Children under 18 years diagnosed with cancer.pdf">
+                    Medical
+                    Card Application Form for Children under 18 years, Form MC1(b)
+                </a>.
+            </p>
+
+            <p><strong>Appeals</strong></p>
+
+            <p>
+                If you have been refused a medical card and are not satisfied with the
+                decision, you may have it reviewed. Your circumstances may have changed or you
+                may have left out some relevant information from the original application. If
+                you are not satisfied with the review you may <a href="https://www.hse.ie/eng/about/qavd/appeals-service/appeals-officers-contact-details/">
+                    make
+                    an appeal to the Appeals Office for your HSE Area
+                </a>. The contact details will
+                also be contained in your letter of refusal. The Appeals Office will conduct a
+                reassessment of your application. This will be conducted by HSE staff who were
+                not involved in deciding on your original application.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

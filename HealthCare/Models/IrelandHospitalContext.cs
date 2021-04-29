@@ -38,6 +38,7 @@ namespace HealthCare.Models
         public virtual DbSet<Vacancy> Vacancies { get; set; }
         public virtual DbSet<HospitalSearchViewModel> Getghospitaltype { get; set; }
         public virtual DbSet<OrganDonationViewModel> GetOrganInformation { get; set; }
+        public virtual DbSet<MedicalCardViewModel> GetMedicalAccess { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -421,32 +422,7 @@ namespace HealthCare.Models
          
             OnModelCreatingPartial(modelBuilder);
         }
-        //public async Task<List<HospitalSearchViewModel>> GetProductByIDAsync(string type,string city)
-        //{
-        //    // Initialization.  
-        //    List<HospitalSearchViewModel> lst = new List<HospitalSearchViewModel>();
-
-        //    try
-        //    {
-        //        // Settings.  
-        //        SqlParameter typeparam = new SqlParameter("@type", type ?? (object)DBNull.Value);
-        //        SqlParameter locationparam = new SqlParameter("@city", city ?? (object)DBNull.Value);
-        //        // Processing.  
-        //        string sqlQuery = "EXEC [dbo].[Getgospitaltype] " +
-        //                            "@type"+ "@city";
-
-        //        lst = await this.<HospitalSearchViewModel>().FromSql(sqlQuery, typeparam, locationparam).ToListAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-
-        //    // Info.  
-        //    return lst;
-        //}
-
-   
+        
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
       
     }
