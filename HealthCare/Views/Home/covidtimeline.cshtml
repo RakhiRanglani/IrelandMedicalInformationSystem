@@ -1,0 +1,158 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    
+    <link rel="stylesheet" type="text/css" href="~/css/main.css"></link>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="/js/utils.js"></script>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+
+    <div id="flexcontainer">
+        <div id="title" class="caption">COVID-19 Timeline</div>
+        <div id="date" class="caption"></div>
+        <div id="dateListPanel" class="caption">
+            <div id="datelist"></div>
+        </div>
+        <input id="timelineSlider" oninput="currentTimeline=this.value; updateView();" type="range" min="0" max="0" value="0" step="1"></input>
+        <div id="mapid"></div>
+        <div id="datasrc" class="caption">Data source: <a class="caption link" href="https://github.com/CSSEGISandData/COVID-19"> https://github.com/CSSEGISandData/COVID-19 </a> </div>
+    </div>
+
+    <div id="popup">Drag the timeline slider to select a date</div>
+
+
+    <script>
+    
+         debugger;
+        var mymap = L.map('mapid').setView([20.0, 20.0], 2.6);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(mymap);
+
+        var csvContent_cases = loadFile("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv");
+        var csvContent_deaths = loadFile("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv");
+        var csvContent_recov = loadFile("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv");
+        var compiledData = CompileData(csvContent_cases, csvContent_deaths, csvContent_recov);
+        var timeEntries = parseTimeline(csvContent_cases);
+        var currentTimeline = timeEntries.length - 1;
+
+        var circles = [];
+
+        var dateDisplay = document.getElementById("date");
+        var dateList = document.getElementById("datelist");
+        var highlightedDateLabel = undefined;
+
+        let lblidx = 0;
+        for (let dateStr of timeEntries) {
+            let lblidx_copy = lblidx;
+            var para = document.createElement("P");
+            para.innerText = dateStr;
+            para.onclick = () => {
+                timelineSlider.value = lblidx_copy;
+                currentTimeline = lblidx_copy;
+                updateView();
+            }
+            para.classList.add("dateListElement");
+            para.classList.add("unselectable");
+            dateList.appendChild(para);
+            ++lblidx;
+        }
+
+        var popup = document.getElementById("popup");
+
+        var timelineSlider = document.getElementById("timelineSlider");
+        timelineSlider.max = timeEntries.length - 1;
+        timelineSlider.value = currentTimeline;
+
+        function updateLabelSizing() {
+            dateListContentWidth = (dateList.firstChild.clientWidth + 0.5) * (timeEntries.length - 1);
+            let offscreenWidth = dateListContentWidth - dateList.clientWidth;
+            let pan = 0.0;
+            if (offscreenWidth > 0) {
+                let selectedTimelinePercentageValue = currentTimeline / (timeEntries.length - 1.0);
+                pan = selectedTimelinePercentageValue * offscreenWidth;
+            }
+            dateList.style.left = `${-pan}px`;
+        }
+
+        window.onresize = function () {
+            updateLabelSizing();
+        };
+
+        function updateView() {
+            dateDisplay.textContent = "Current date: " + ConvertDate(timeEntries[currentTimeline]);
+            for (let c of circles) {
+                mymap.removeLayer(c);
+            }
+            circles = [];
+
+            let totalCases = GetTotalCases("infected", compiledData, timeEntries, currentTimeline);
+            popup.innerHTML = "Global cases: <font color='orange'><b>" + numberWithCommas(totalCases) + "</b></font>";
+
+            let newHighlightee = dateList.firstChild;
+            for (let i = 0; i < currentTimeline; ++i) {
+                newHighlightee = newHighlightee.nextSibling;
+            }
+            if (newHighlightee !== highlightedDateLabel) {
+                if (highlightedDateLabel != undefined)
+                    highlightedDateLabel.classList.remove("highlight");
+                newHighlightee.classList.add("highlight");
+                highlightedDateLabel = newHighlightee;
+            }
+
+            updateLabelSizing();
+
+            for (let countryData of Object.values(compiledData)) {
+                let infectedCount = Number.parseInt(getLatestAvailableData(countryData.infected, timeEntries, currentTimeline));
+                let deadCount = Number.parseInt(getLatestAvailableData(countryData.dead, timeEntries, currentTimeline));
+                let recoveredCount = Number.parseInt(getLatestAvailableData(countryData.recovered, timeEntries, currentTimeline));
+                let province_state = countryData.infected["Province/State"] == "" ? "" : (countryData.infected["Province/State"] + "<br/>");
+                let text = `<b>${countryData.infected["Country/Region"]}</b><br/>${province_state}Infected: <font color="orange">${numberWithCommas(infectedCount)}</font><br/>Dead: <font color="red">${numberWithCommas(deadCount)}</font><br/>Recovered: <font color="green">${numberWithCommas(recoveredCount)}</font>`;
+                if (infectedCount > 0) {
+                    circles.push(L.circle([countryData.infected.Lat, countryData.infected.Long], Math.sqrt(80000.0 * infectedCount), {
+                        color: '#e01',
+                        fillColor: '#f03',
+                        fillOpacity: 0.35
+                    }).addTo(mymap).bindPopup(text));
+
+                    circles.push(L.circle([countryData.infected.Lat, countryData.infected.Long], Math.sqrt(80000.0 * deadCount), {
+                        color: '#f00',
+                        fillColor: '#f00',
+                        fillOpacity: 0.8
+                    }).addTo(mymap).bindPopup(text));
+                }
+            }
+        }
+
+        updateView();
+
+     
+
+    </script>
+
+
+
+</body>
+</html>

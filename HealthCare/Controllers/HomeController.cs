@@ -42,6 +42,11 @@ namespace HealthCare.Controllers
         {
             return View();
         }
+        public IActionResult covidtimeline()
+        {
+            return View();
+        }
+        
         public  IActionResult Rehab()
         {
             return View();
@@ -52,6 +57,25 @@ namespace HealthCare.Controllers
              string param2 = model.City;
 
             model.Hospitallist = _context.Getghospitaltype.FromSqlInterpolated($"Getgospitaltype {param1},{param2}").ToList();
+            return View(model);
+
+        }
+       
+        public IActionResult MedicalSearch(MedicineViewModel model)
+        {
+            
+            string medicinename = model.Medicine_Name;
+            if (medicinename != null)
+            {
+                model.Medicinelist = _context.GetMedicineAvailability.FromSqlInterpolated($"MedicineAvailability {medicinename}").ToList();
+            }
+            else
+            {
+                model = new MedicineViewModel()
+                {
+                    Medicinelist = new List<MedicineViewModel>(),
+                };
+            }
             return View(model);
 
         }

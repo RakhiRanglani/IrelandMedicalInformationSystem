@@ -40,6 +40,8 @@ namespace HealthCare.Models
         public virtual DbSet<OrganDonationViewModel> GetOrganInformation { get; set; }
         public virtual DbSet<MedicalCardViewModel> GetMedicalAccess { get; set; }
 
+
+        public virtual DbSet<MedicineViewModel> GetMedicineAvailability { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
