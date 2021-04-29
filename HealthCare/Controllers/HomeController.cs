@@ -46,7 +46,11 @@ namespace HealthCare.Controllers
         {
             return View();
         }
-        
+        public IActionResult Careers()
+        {
+            return View();
+        }
+
         public  IActionResult Rehab()
         {
             return View();
