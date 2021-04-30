@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql.onprem",
+      "connectionId": "LogindbConnection",
+      "secretStore": null
+    },
+    "mssql2": {
+      "type": "mssql.onprem",
+      "connectionId": "IrelandHospitalContext",
+      "secretStore": null
+    }
+  }
+}

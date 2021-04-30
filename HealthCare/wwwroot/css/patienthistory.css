@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    padding: 0;
+    background:;
+}
+
+.header {
+    background-color: gainsboro;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    padding: 50px 50px;
+}
+
+h1 {
+    color: rgb(12, 11, 11);
+    margin-bottom: 20px;
+    font-size: 30px;
+    letter-spacing: 1px;
+    text-align: center;
+    border-radius: 20px;
+    border: black;
+}
+
+.search-field {
+    height: 10px;
+    padding: 20px;
+    border: orangered;
+    border-radius: 50px;
+    outline: none;
+}
+
+.PatientID {
+    width: 275px;
+}
+
+.search-btn {
+    height: 50px;
+    width: 150px;
+    background: #d16a6a;
+    border: rgb(90, 87, 55);
+    color: #000;
+    border-radius: 25px;
+}
+
+    .search-btn: :hover {
+        background: #ffc107;
+        cursor: pointer;
+    }
+
+.form-box {
+    background: none padding: 20px;
+}
