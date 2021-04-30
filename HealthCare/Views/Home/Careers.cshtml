@@ -1,22 +1,117 @@
-﻿<!DOCTYPE html>
-<head>
-    <title>Medical Career</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/css/style2.css" type="text/css" rel="stylesheet" />
+﻿@model HealthCare.ViewModel.CareerSearchVieModel
+@{
 
+    ViewBag.Title = "Hospital Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link href="/css/careerpage.css" type="text/css" rel="stylesheet" />
+    <style type="text/css">
+        @@media only screen and (min-width: 300px) {
+            table, th, td {
+                border: 1px solid black;
+                text-align: center;
+            }
+
+            th {
+                height: 50px;
+                background-color: darkgray;
+                color: white;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+
+            tr {
+                height: 30px;
+            }
+
+                tr:nth-child(even) {
+                    background-color: #f2f4f5;
+                }
+
+            td {
+                font-size: 12px;
+                white-space: nowrap;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <div class="header">
-        <form>
-            <h1> <b></b>Search for Medical Jobs  </h1>
-            <div class="form-box">
-                <input type="text" class="search-field Location"
-                       placeholder="Enter Career ID">
-                <input type="text" class="search-field Location"
-                       placeholder="Enter Hospitals">
-                <button class="search-btn" type="button">Search</button>
+        <form method="post" role="form" class="form-horizontal" style="width: 365%;">
+            @Html.AntiForgeryToken()
+
+            <h4 style="font-family: fantasy;">Search Job Posting by the Different Hospitals </h4>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.HospitalName, new { @class = "col-md-4 control-label" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.HospitalName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.HospitalName, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(m => m.City, new { @class = "col-md-4 control-label" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <button asp-page-handler="Detail" class="btn btn-default" style="background: azure;">Search</button>
+                </div>
             </div>
         </form>
     </div>
+    @if (Model != null && Model.careerlist.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-offset-1 col-md-8">
+                <section>
+                    <table class="table table-bordered table-striped" style="width: 152% !important;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Sr No.</th>
+                                <th style="text-align: center;">Hospital Name</th>
+                                <th style="text-align: center;">City</th>
+                                <th style="text-align: center;">Job Availability</th>
+                                <th style="text-align: center;">Job Description</th>
+                                <th style="text-align: center;">County</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @for (int i = 0; i < Model.careerlist.Count; i++)
+                            {
+                                <tr>
+                                    <td style="text-align: center;">@(i + 1)</td>
+                                    <td style="text-align: center;">@Model.careerlist[i].HospitalName</td>
+                                    <td style="text-align: center;">@Model.careerlist[i].City</td>
+                                    <td style="text-align: center;">@Model.careerlist[i].JobAvailability</td>
+                                    <td style="text-align: center;">@Model.careerlist[i].JobDetails</td>
+                                    <td style="text-align: center;">@Model.careerlist[i].County</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+
+    }
+
 </body>
+
+</html>

@@ -46,9 +46,13 @@ namespace HealthCare.Controllers
         {
             return View();
         }
-        public IActionResult Careers()
+        public IActionResult Careers(CareerSearchVieModel model)
         {
-            return View();
+            string hospitalname = model.HospitalName;
+            string city = model.City;
+
+            model.careerlist = _context.GetCareerDetails.FromSqlInterpolated($"getCareerdetails {hospitalname},{city}").ToList();
+            return View(model);
         }
 
         public  IActionResult Rehab(RehabilationViewModel model)
