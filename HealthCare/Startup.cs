@@ -34,13 +34,14 @@ namespace HealthCare
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("LogindbConnection")));
+                options.UseSqlServer("Server=DESKTOP-K9BAT38\\SQLEXPRESS;Database=LoginAuthDB;Trusted_Connection=True"));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDbContext<IrelandHospitalContext>(options =>
-               options.UseSqlServer(
-                   Configuration.GetConnectionString("IrelandHospitalContext")));
+               options.UseSqlServer("Server=DESKTOP-K9BAT38\\SQLEXPRESS;Database=IrelandHospital;Trusted_Connection=True;"));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
