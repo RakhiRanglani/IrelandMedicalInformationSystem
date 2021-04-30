@@ -48,49 +48,98 @@ namespace HealthCare.Controllers
         }
         public IActionResult Careers(CareerSearchVieModel model)
         {
-            string hospitalname = model.HospitalName;
-            string city = model.City;
+            if (String.IsNullOrEmpty(model.HospitalName) && String.IsNullOrEmpty(model.City))
+            {
+                model = new CareerSearchVieModel()
+                {
+                    careerlist = new List<CareerSearchVieModel>(),
+                };
+            }
+            else
+            {
+                string hospitalname = model.HospitalName;
+                string city = model.City;
 
-            model.careerlist = _context.GetCareerDetails.FromSqlInterpolated($"getCareerdetails {hospitalname},{city}").ToList();
+                model.careerlist = _context.GetCareerDetails.FromSqlInterpolated($"getCareerdetails {hospitalname},{city}").ToList();
+            }
             return View(model);
         }
         public IActionResult PatientHistory(PatientHistoryViewModel model)
         {
-            int patientId = Convert.ToInt32(model.PatientID);
-            model.patientlist = _context.GetPatientHistoryDetails.FromSqlInterpolated($"getPatientHistoryData {patientId}").ToList();
+            if (model.PatientID <= 0)
+            {
+                model = new PatientHistoryViewModel()
+                {
+                    patientlist = new List<PatientHistoryViewModel>(),
+                };
+            }
+            else
+            {
+                int patientId = model.PatientID;
+                model.patientlist = _context.GetPatientHistoryDetails.FromSqlInterpolated($"getPatientHistoryData {patientId}").ToList();
+
+            }
             return View(model);
         }
         public IActionResult Rehab(RehabilationViewModel model)
         {
+            try
+            {
+                model.rehabilationlist = _context.GetRehabInfo.FromSqlInterpolated($"Rehabilitation").ToList();
 
-            model.rehabilationlist = _context.GetRehabInfo.FromSqlInterpolated($"Rehabilitation").ToList();
+            }
+            catch (Exception ex)
+            {
+                // Info  
+                Console.Write(ex);
+            }
+
             return View(model);
-
         }
         public IActionResult HospitalSearch(HospitalSearchViewModel model)
         {
-            string param1 = model.HospitalType;
-            string param2 = model.City;
+            if (String.IsNullOrEmpty(model.HospitalType) && String.IsNullOrEmpty(model.City))
+            {
+                model = new HospitalSearchViewModel()
+                {
+                    Hospitallist = new List<HospitalSearchViewModel>(),
+                };
+            }
+            else
+            {
+                string param1 = model.HospitalType;
+                string param2 = model.City;
 
-            model.Hospitallist = _context.Getghospitaltype.FromSqlInterpolated($"Getgospitaltype {param1},{param2}").ToList();
+                model.Hospitallist = _context.Getghospitaltype.FromSqlInterpolated($"Getgospitaltype {param1},{param2}").ToList();
+
+            }
             return View(model);
 
         }
 
         public IActionResult MedicalSearch(MedicineViewModel model)
         {
-
-            string medicinename = model.Medicine_Name;
-            if (medicinename != null)
-            {
-                model.Medicinelist = _context.GetMedicineAvailability.FromSqlInterpolated($"MedicineAvailability {medicinename}").ToList();
-            }
-            else
+            if (String.IsNullOrEmpty(model.Medicine_Name))
             {
                 model = new MedicineViewModel()
                 {
                     Medicinelist = new List<MedicineViewModel>(),
                 };
+            }
+            else
+            {
+                string medicinename = model.Medicine_Name;
+                if (medicinename != null)
+                {
+                    model.Medicinelist = _context.GetMedicineAvailability.FromSqlInterpolated($"MedicineAvailability {medicinename}").ToList();
+                }
+                else
+                {
+                    model = new MedicineViewModel()
+                    {
+                        Medicinelist = new List<MedicineViewModel>(),
+                    };
+                }
             }
             return View(model);
 

@@ -183,8 +183,8 @@ namespace HealthCare.Controllers
                 }
                 else
                 {
-                    TempData["error_msg"] = "You dont have access to view this page!!";
-                  
+                    TempData["error_msg"] = "You dont have access to view this Organ Details page!!";
+
                     return View(model);
                 }
 
@@ -195,8 +195,8 @@ namespace HealthCare.Controllers
                 return View(model);
             }
 
-
-
         }
+
     }
 }
+
