@@ -1,1 +1,0 @@
-﻿exec MedicineAvailability @MedicineName= 'Adderall'
