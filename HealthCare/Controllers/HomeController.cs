@@ -54,27 +54,32 @@ namespace HealthCare.Controllers
             model.careerlist = _context.GetCareerDetails.FromSqlInterpolated($"getCareerdetails {hospitalname},{city}").ToList();
             return View(model);
         }
-
-        public  IActionResult Rehab(RehabilationViewModel model)
+        public IActionResult PatientHistory(PatientHistoryViewModel model)
+        {
+            int patientId = Convert.ToInt32(model.PatientID);
+            model.patientlist = _context.GetPatientHistoryDetails.FromSqlInterpolated($"getPatientHistoryData {patientId}").ToList();
+            return View(model);
+        }
+        public IActionResult Rehab(RehabilationViewModel model)
         {
 
             model.rehabilationlist = _context.GetRehabInfo.FromSqlInterpolated($"Rehabilitation").ToList();
             return View(model);
-           
+
         }
         public IActionResult HospitalSearch(HospitalSearchViewModel model)
         {
-             string param1 =model.HospitalType;
-             string param2 = model.City;
+            string param1 = model.HospitalType;
+            string param2 = model.City;
 
             model.Hospitallist = _context.Getghospitaltype.FromSqlInterpolated($"Getgospitaltype {param1},{param2}").ToList();
             return View(model);
 
         }
-       
+
         public IActionResult MedicalSearch(MedicineViewModel model)
         {
-            
+
             string medicinename = model.Medicine_Name;
             if (medicinename != null)
             {

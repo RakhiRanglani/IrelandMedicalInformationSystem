@@ -1,0 +1,146 @@
+﻿@model HealthCare.ViewModel.PatientHistoryViewModel
+@{
+
+    ViewBag.Title = "Pateint History Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/patienthistory.css" />
+    <style type="text/css">
+        @@media only screen and (min-width: 300px) {
+            table, th, td {
+                border: 1px solid black;
+                text-align: center;
+            }
+
+            th {
+                height: 50px;
+                background-color: lightblue;
+                color: white;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+
+            tr {
+                height: 30px;
+            }
+
+                tr:nth-child(even) {
+                    background-color: #f2f4f5;
+                }
+
+            td {
+                font-size: 12px;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+
+        <div class=".form-box" style="margin-right: 70%;">
+            <div class="col-md-8">
+                <section>
+                    <form method="post" role="form" class="form-horizontal" style="width: 365%;">
+                        @Html.AntiForgeryToken()
+
+                        <h4 style="font-family: fantasy;">Search Patient Record</h4>
+                        <hr />
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PatientID, new { @class = "col-md-4 control-label search-field PatientID" })
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(m => m.PatientID, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.PatientID, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-10">
+                                <button asp-page-handler="Detail" class="search-btn ">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+    </div>
+
+    @if (Model != null && Model.patientlist.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-offset-1 col-md-8">
+                <section>
+                    @for (int i = 0; i < Model.patientlist.Count; i++)
+                    {
+                        <table class="table table-bordered table-striped" style="width: 152% !important;">
+                            <tbody>
+                                <tr>Patient Information</tr>
+                                <tr>
+                                    <td><p>Pateint Name</p></td>
+                                    <td>@Model.patientlist[i].PatientName</td>
+                                    <td><p>Gender</p></td>
+                                    <td>@Model.patientlist[i].Gender</td>
+
+                                </tr>
+                                <tr>
+                                    <td><p>Pateint Email Id</p></td>
+                                    <td>@Model.patientlist[i].EmailID</td>
+                                    <td><p>Patient Phone Number</p></td>
+                                    <td>@Model.patientlist[i].PhoneNumber</td>
+
+                                </tr>
+                                <tr>
+                                    <td><p>Pateint Height</p></td>
+                                    <td>@Model.patientlist[i].Height</td>
+                                    <td><p>Patient Weight</p></td>
+                                    <td>@Model.patientlist[i].PatientWeight</td>
+
+                                </tr>
+                                <tr>
+                                    <td><p>Pateint Age</p></td>
+                                    <td>@Model.patientlist[i].Age</td>
+                                    <td><p>Covid Test Result</p></td>
+                                    <td>@Model.patientlist[i].CovidFlag</td>
+
+                                </tr>
+                                <tr>Appointment Information</tr>
+                                <tr>
+                                    <td><p>Appointment taken by (Doctor Name)</p></td>
+                                    <td>@Model.patientlist[i].DoctorName</td>
+                                    <td><p>Last Appointment Date</p></td>
+                                    <td>@Model.patientlist[i].Appointmentdate.ToShortTimeString()</td>
+
+                                </tr>
+                                <tr>
+                                    <td><p>Hospital department Name</p></td>
+                                    <td>@Model.patientlist[i].SpecialtyDescription</td>
+                                    <td><p>Medical Consition of the Patient</p></td>
+                                    <td>@Model.patientlist[i].MedicalCondition</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    }
+
+                </section>
+            </div>
+        </div>
+
+    }
+
+</body>
+</html>
+

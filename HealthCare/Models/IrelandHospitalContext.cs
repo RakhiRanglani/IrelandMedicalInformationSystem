@@ -42,6 +42,7 @@ namespace HealthCare.Models
         public virtual DbSet<MedicalCardViewModel> GetMedicalAccess { get; set; }
 
         public virtual DbSet<CareerSearchVieModel> GetCareerDetails { get; set; }
+        public virtual DbSet<PatientHistoryViewModel> GetPatientHistoryDetails { get; set; }
         public virtual DbSet<MedicineViewModel> GetMedicineAvailability { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
